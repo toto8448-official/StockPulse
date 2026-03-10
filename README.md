@@ -1,2 +1,2 @@
 # StockPulse
-Investment app for my father.
+Bullish or Bearish, your stance.
