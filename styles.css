@@ -134,6 +134,21 @@ body {
     gap: 10px;
 }
 
+/* Chart container fixes */
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    margin-bottom: 10px;
+}
+
+canvas {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto !important;
+    height: auto !important;
+}
+
 /* watchlist / alerts */
 .stock-row {
     display: flex;
@@ -294,6 +309,13 @@ body {
     padding: 18px;
 }
 
+.backtest-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
 .dividend-item {
     display: flex;
     justify-content: space-between;
@@ -316,4 +338,10 @@ body {
 i { 
     margin-right: 5px; 
     width: 18px; 
+}
+
+/* Analytics page fixes */
+.analytics-content {
+    max-width: 100%;
+    overflow: hidden;
 }
