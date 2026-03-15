@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockPulse · Bullish or Bearish, your stance.</title>
+    <!-- Chart.js for multi-line and pie charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Fontawesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-container">
+    <!-- header -->
+    <div class="navbar">
+        <div class="logo">
+            <h1>StockPulse</h1>
+            <span>⚡ Bullish or Bearish, your stance.</span>
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn active" data-page="dashboard"><i class="fas fa-home"></i> Dashboard</button>
+            <button class="nav-btn" data-page="analytics"><i class="fas fa-chart-line"></i> Analytics</button>
+            <button class="nav-btn" data-page="screener"><i class="fas fa-filter"></i> Screener</button>
+            <button class="nav-btn" data-page="dividends"><i class="fas fa-calendar-alt"></i> Dividends</button>
+            <button class="nav-btn" data-page="stockdetail"><i class="fas fa-chart-bar"></i> Stock detail</button>
+        </div>
+    </div>
+
+    <!-- pages container -->
+    <div class="pages">
+        <!-- DASHBOARD (watchlist + alerts) -->
+        <div id="dashboard" class="page active-page">
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-star" style="color:#eab308;"></i> Watchlist & alerts</div>
+                    <div id="watchlist-container"></div>
+                    <p style="margin-top:16px; font-size:0.9rem;"><i class="fas fa-globe"></i> worldwide stocks · 60s auto-refresh</p>
+                </div>
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-newspaper"></i> Global AI pulse</div>
+                    <div id="global-sentiment-feed">Loading market sentiment ...</div>
+                    <div style="margin-top:20px"><i class="fas fa-robot"></i> Scanning headlines for watchlist stocks</div>
+                </div>
+            </div>
+            <div class="grid-2" style="margin-top:20px;">
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-clock-rotate-left"></i> Backtest snapshot</div>
+                    <div>1y: <span class="positive">+14.2%</span> vs SPY +9.1% · 3y: +32% · 5y: +58%</div>
+                    <div class="backtest-result" style="margin-top:15px;">📈 Bullish momentum (simulated)</div>
+                </div>
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-bell"></i> visual flags</div>
+                    <div id="alert-flags">🔔 AAPL above target · MSFT below target</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANALYTICS page -->
+        <div id="analytics" class="page">
+            <h2 style="margin-bottom:20px;"><i class="fas fa-chart-pie"></i> Portfolio analytics & benchmarks</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">📊 vs S&P 500 (multi-line)</div>
+                    <canvas id="portfolioChart" width="400" height="200"></canvas>
+                </div>
+                <div class="card">
+                    <div class="card-title">🥧 sector allocation</div>
+                    <canvas id="sectorChart" width="250" height="200"></canvas>
+                </div>
+            </div>
+            <div class="card" style="margin-top:25px;">
+                <div class="card-title"><i class="fas fa-flask"></i> Backtest simulator (current holdings)</div>
+                <div class="grid-3">
+                    <div class="backtest-result">1 year: +18.3% (outperform SPX 5.2%)</div>
+                    <div class="backtest-result">3 year: +41.7% (outperform SPX 11.4%)</div>
+                    <div class="backtest-result">5 year: +73.2% (outperform SPX 20.1%)</div>
+                </div>
+                <p style="margin-top:15px;"><i class="fas fa-info-circle"></i> simulated based on current holdings: AAPL, MSFT, NVDA, JPM, XOM</p>
+            </div>
+        </div>
+
+        <!-- SCREENER page -->
+        <div id="screener" class="page">
+            <h2 style="margin-bottom:20px;"><i class="fas fa-sliders"></i> stock screener (worldwide)</h2>
+            <div class="screener-filters">
+                <div class="filter-item"><label>Market cap (B)</label><input type="text" placeholder="min-max" id="mcapFilter" value="10-2000"></div>
+                <div class="filter-item"><label>P/E ratio</label><input type="text" placeholder="0-30" id="peFilter" value="5-25"></div>
+                <div class="filter-item"><label>Div yield %</label><input type="text" placeholder="min" id="divFilter" value="0.5"></div>
+                <div class="filter-item"><label>Industry</label><select id="industryFilter"><option>Tech</option><option>Energy</option><option>Finance</option><option>Healthcare</option></select></div>
+                <div><button class="btn-small" id="applyScreener" style="margin-top:18px;">Apply</button></div>
+            </div>
+            <table class="table-screener" id="screenerTable">
+                <thead><tr><th>Symbol</th><th>Name</th><th>Market cap (B)</th><th>P/E</th><th>Div yield</th><th>Industry</th><th>Detail</th></tr></thead>
+                <tbody id="screenerBody"></tbody>
+            </table>
+        </div>
+
+        <!-- DIVIDENDS page -->
+        <div id="dividends" class="page">
+            <h2><i class="fas fa-money-bill-trend-up"></i> upcoming dividends (portfolio & watchlist)</h2>
+            <div class="grid-3" style="margin:30px 0;" id="dividendList"></div>
+        </div>
+
+        <!-- STOCK DETAIL page -->
+        <div id="stockdetail" class="page">
+            <h2><i class="fas fa-microchip"></i> stock detail: AAPL (example)</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <div>🍏 AAPL · $175.34 <span class="sentiment-badge bullish">Bullish +62</span></div>
+                    <div style="margin:20px 0"><i class="fas fa-newspaper"></i> <strong>AI sentiment scan (global headlines):</strong></div>
+                    <div id="aiSentimentBox">🧠 Analysing 1,240 news items: positive product cycle, strong services growth. <span class="sentiment-badge bullish">Bullish 78%</span></div>
+                    <p style="margin-top:18px;">Summary: Bullish score 72, Bearish 28. Macrosupport, AI optimism.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">📡 realtime headlines</div>
+                    <div>• "Apple beats Q3 estimates" (Reuters) · <i class="fas fa-arrow-up bullish"></i></div>
+                    <div>• "Vision Pro supply chain" (Nikkei) · neutral</div>
+                    <div>• "Warren Buffett cuts stake" (WSJ) · <i class="fas fa-arrow-down bearish"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            StockPulse · realtime 60s interval · worldwide data · alerts trigger browser notification & flags
+        </div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
