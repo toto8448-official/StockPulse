@@ -1,0 +1,319 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f6f8fc;
+    color: #1e293b;
+    line-height: 1.5;
+    padding: 20px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap');
+
+.app-container {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* header / navigation */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-radius: 32px;
+    padding: 12px 28px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,20,50,0.05);
+}
+
+.logo h1 {
+    font-weight: 700;
+    font-size: 1.9rem;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.logo span {
+    font-size: 0.9rem;
+    font-weight: 400;
+    background: none;
+    -webkit-text-fill-color: #64748b;
+    background-clip: unset;
+    display: block;
+    line-height: 1.2;
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    padding: 10px 22px;
+    font-weight: 600;
+    border-radius: 40px;
+    color: #475569;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 1rem;
+}
+
+.nav-btn i { 
+    margin-right: 8px; 
+}
+
+.nav-btn:hover { 
+    background: #f1f4f9; 
+    color: #1e293b; 
+}
+
+.nav-btn.active {
+    background: #1e293b;
+    color: white;
+}
+
+.pages {
+    background: white;
+    border-radius: 32px;
+    padding: 30px 28px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.04);
+    min-height: 70vh;
+}
+
+.page {
+    display: none;
+}
+
+.page.active-page {
+    display: block;
+}
+
+/* cards / grid */
+.grid-2, .grid-3, .grid-4 {
+    display: grid;
+    gap: 24px;
+}
+
+.grid-2 { 
+    grid-template-columns: repeat(2,1fr); 
+}
+
+.grid-3 { 
+    grid-template-columns: repeat(3,1fr); 
+}
+
+.grid-4 { 
+    grid-template-columns: repeat(4,1fr); 
+}
+
+.card {
+    background: #f9fafc;
+    border-radius: 24px;
+    padding: 22px 20px;
+    border: 1px solid #eef2f6;
+    transition: 0.15s;
+}
+
+.card-title {
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* watchlist / alerts */
+.stock-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed #dce3ec;
+}
+
+.stock-row:last-child { 
+    border: none; 
+}
+
+.stock-symbol { 
+    font-weight: 700; 
+    width: 70px; 
+}
+
+.stock-price { 
+    color: #2563eb; 
+    font-weight: 600; 
+    width: 80px; 
+}
+
+.alert-config {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.alert-config input {
+    width: 90px;
+    padding: 6px 10px;
+    border-radius: 40px;
+    border: 1px solid #cdd9e6;
+    background: white;
+}
+
+.alert-config select {
+    padding: 6px 8px;
+    border-radius: 30px;
+    border: 1px solid #cdd9e6;
+    background: white;
+}
+
+.trigger-badge {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 4px 10px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.flag-active {
+    background: #22c55e;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.btn-small {
+    background: white;
+    border: 1px solid #b9c7da;
+    border-radius: 30px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.btn-small:hover { 
+    background: #e6edf6; 
+}
+
+.table-screener {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-screener th {
+    text-align: left;
+    padding: 14px 6px;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.table-screener td {
+    padding: 12px 6px;
+    border-bottom: 1px solid #ecf1f7;
+}
+
+.table-screener tr:last-child td { 
+    border: none; 
+}
+
+.screener-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 25px;
+    background: #f1f6fd;
+    padding: 20px;
+    border-radius: 28px;
+    margin-bottom: 25px;
+}
+
+.filter-item label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4b5a6e;
+}
+
+.filter-item input, .filter-item select {
+    padding: 8px 12px;
+    border-radius: 30px;
+    border: 1px solid #cbd5e1;
+    width: 160px;
+}
+
+.detail-link {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.detail-link:hover { 
+    text-decoration: underline; 
+}
+
+.sentiment-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 40px;
+    font-weight: 600;
+}
+
+.bullish { 
+    background: #dcfce7; 
+    color: #166534; 
+}
+
+.bearish { 
+    background: #fee2e2; 
+    color: #991b1b; 
+}
+
+.neutral { 
+    background: #f1f5f9; 
+    color: #334155; 
+}
+
+.backtest-result {
+    background: #eef4ff;
+    border-radius: 20px;
+    padding: 18px;
+}
+
+.dividend-item {
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 12px;
+    border: 1px solid #eef2f6;
+}
+
+.footer-note {
+    margin-top: 25px;
+    color: #5f6c80;
+    font-size: 0.9rem;
+    text-align: center;
+    border-top: 1px solid #dde3ed;
+    padding-top: 20px;
+}
+
+i { 
+    margin-right: 5px; 
+    width: 18px; 
+}
